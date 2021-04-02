@@ -1,10 +1,46 @@
 from selenium import webdriver
+import unittest
 #从selenium引入webdriver
 
-brower = webdriver.Firefox()
-#启动一个selenium"webdriver"去弹出一个firefox窗口
-brower.get('http://localhost:8000')
-#用它打开本地网页
+class NewVisitorTest(unittest.TestCase):  #(1)
+    
+    def setUp(self):    #(3)
+        self.browser = webdriver.Firefox()
+        
+    def tearDown(self): #(3)
+        self.browser.quit()
+        
+    def test_can_start_a_list_and_retrieve_it_later(self): #(2)
+        # Edith has heard about a cool new online to-do app. She goes
+        # to check out its homepage
+        self.browser.get('http://localhost:8000')
+        
+        # She notices the page title and header mention to-do lists
+        self.assertIn('To-Do', self.browser.title)  # (4)
+        self.fail('Finish the test!')               # (5)
+        
+if __name__ == '__main__':              #(6)
+    unittest.main(argv=['ignored', '-v'], exit=False)  #(7)
 
-assert 'Django' in browser.title
-#测试断言，检查在网页Title中有没有“Django”这个词
+# She is invited to enter a to-do item s traight away
+
+# She types "Buy peacock feathers" into a text box ( Edith's hobby
+# is tying fly-fishing lures )
+
+# when she hits enter, the page updates , and now the page l ists
+# "1: Buy peacock feathers" as an item in a to-do list
+
+# There is still a text box inviting her to add another item. She
+# enters "Use peacock feathers to make a fly" (Edith is very methodical)
+
+# The page updates again, and now shows both items on her list
+
+# Edith wonders whether the site will remember her list. Then she sees
+# that the site has generated a unique URL for her -- there is some
+# explanatory text to that effect.
+
+# She visits that URL - her to-do list is still there .
+
+# Satisfied, she goes back to sleep
+
+browser.quit()
