@@ -1,4 +1,4 @@
-from django.test import LiveServerTestCase
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
@@ -9,7 +9,7 @@ MAX_WAIT = 10
 
 # 从selenium引入webdriver
 
-class NewVisitorTest(LiveServerTestCase):  # (1)
+class NewVisitorTest(StaticLiveServerTestCase):  # (1)
 
     def setUp(self):  # (3)
         self.browser = webdriver.Firefox()
